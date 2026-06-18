@@ -1,0 +1,40 @@
+{
+  "geode": "3.3.0",
+  "version": "v1.2.0",
+  "id": "demon1125.optimizer",
+  "name": "Demon1125 Optimizer",
+  "developer": "demon1125",
+  "description": "Definitivní ModernFix pro Geometry Dash. Extrémní FPS boost a záchrana RAM.",
+  "early-load": false,
+  "settings": {
+    "show-welcome": {
+      "name": "VIP Uvítací zpráva",
+      "type": "bool",
+      "default": true
+    },
+    "clear-ram": {
+      "name": "Čištění RAM při startu",
+      "description": "Smaže nepoužívané textury (Jako FerriteCore).",
+      "type": "bool",
+      "default": true
+    },
+    "force-ldm": {
+      "name": "Auto LDM (Proti lagům)",
+      "description": "Automaticky zapne LDM u levelů nad 15 000 objektů.",
+      "type": "bool",
+      "default": false
+    },
+    "no-death-effect": {
+      "name": "Instant Respawn (Anti-Lag)",
+      "description": "Vypne explozi částic při smrti. Odstraňuje záseky při respawnu!",
+      "type": "bool",
+      "default": true
+    },
+    "disable-shake": {
+      "name": "Vypnout Shake kamery",
+      "description": "Zabrání enginu třást obrazovkou, ušetří FPS a zlepší čitelnost levelu.",
+      "type": "bool",
+      "default": false
+    }
+  }
+}
