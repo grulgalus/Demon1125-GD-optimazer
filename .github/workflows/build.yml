@@ -16,6 +16,7 @@ jobs:
         config:
           - name: Windows
             os: windows-latest
+            target: Windows
           - name: Android 32-bit
             os: ubuntu-latest
             target: Android32
@@ -24,8 +25,10 @@ jobs:
             target: Android64
           - name: macOS
             os: macos-latest
+            target: macOS
           - name: Linux
             os: ubuntu-latest
+            target: Linux
           - name: iOS
             os: macos-latest
             target: iOS
@@ -36,17 +39,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Geode Profile
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
         run: |
-          mkdir -p ~/.geode/profiles
-          cp -r cli-profile/. ~/.geode/
-        shell: bash
+          brew install cmake ninja
 
-      - name: Build mod
-        uses: geode-sdk/build-geode-mod@main
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build
+
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          choco install cmake ninja -y
+        shell: powershell
+
+      - name: Create build directory
+        run: mkdir -p build
+
+      - name: Configure CMake
+        run: |
+          cd build
+          cmake -G Ninja ..
+
+      - name: Build
+        run: |
+          cd build
+          cmake --build .
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          combine: true
-          target: ${{ matrix.config.target }}
-          cli: v3.3.0
-          bindings: geode-sdk/bindings
-          bindings-ref: main
+          name: build-${{ matrix.config.target }}
+          path: build/
