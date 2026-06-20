@@ -29,12 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Tento krok VYNUTÍ vytvoření prázdného profilu, aby Geode nepanikařilo
-      - name: Setup Dummy Geode Profile
-        run: |
-          mkdir -p ~/.geode
-          echo '{"default-profile":"default","profiles":{"default":{"gd-path":"","name":"default"}}}' > ~/.geode/config.json
-
       - name: Build mod
         uses: geode-sdk/build-geode-mod@main
         with:
