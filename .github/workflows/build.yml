@@ -22,6 +22,13 @@ jobs:
           - name: Android 64-bit
             os: ubuntu-latest
             target: Android64
+          - name: macOS
+            os: macos-latest
+          - name: Linux
+            os: ubuntu-latest
+          - name: iOS
+            os: macos-latest
+            target: iOS
 
     name: Compile for ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
@@ -30,10 +37,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build mod
-      uses: geode-sdk/build-geode-mod@main
-      with:
-        combine: true
-        target: ${{ matrix.config.target }}
-        cli: v3.3.0
-        bindings: geode-sdk/bindings
-        bindings-ref: main
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          combine: true
+          target: ${{ matrix.config.target }}
+          cli: v3.3.0
+          bindings: geode-sdk/bindings
+          bindings-ref: main
