@@ -29,10 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Explicitní instalace Geode CLI (pro jistotu!)
-      - name: Setup Geode
-        uses: geode-sdk/setup-geode@main
-
       - name: Build mod
         uses: geode-sdk/build-geode-mod@main
         with:
