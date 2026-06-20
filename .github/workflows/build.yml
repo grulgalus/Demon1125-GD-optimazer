@@ -36,10 +36,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Geode
+      - name: Setup Geode Profile
         run: |
           mkdir -p ~/.geode/profiles
-          echo "geode profile setup completed"
+          cp -r cli-profile/. ~/.geode/
+        shell: bash
 
       - name: Build mod
         uses: geode-sdk/build-geode-mod@main
